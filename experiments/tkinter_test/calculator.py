@@ -90,12 +90,13 @@ class CalculatorApp:
         add_button.grid(column=3, row=4, padx=5, pady=5)
 
         equal_button = Button(frame, text="=", font=("Arial", 40), width=10, height=1,
-                              bg="#2E2C36", fg="white", command=lambda: self.calculate())
+                              bg="#2E2C36", fg="white", command=self.calculate)
         equal_button.grid(columnspan=4, column=0, row=5, padx=5, pady=5)
 
     def add(self, value):
         CalculatorApp.expression += value
         self.show_text.set(CalculatorApp.expression)
+        print(CalculatorApp.expression)
 
     def calculate(self):
         try:
