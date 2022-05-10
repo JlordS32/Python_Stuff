@@ -1,37 +1,24 @@
 import tkinter as tk
 
+def show_frame(frm):
+    frm.tkraise()
 
-def show_frame(frame):
-    frame.tkraise()
+root = tk.Tk()
+root.geometry('250x250')
 
-
-window = tk.Tk()
-window.state('zoomed')
-
-window.rowconfigure(0, weight=1)
-window.columnconfigure(0, weight=1)
-
-frame1 = tk.Frame(window)
-frame2 = tk.Frame(window)
+frame1 = tk.Frame(root, bg="black")
+frame2 = tk.Frame(root, bg="yellow")
 
 for frame in (frame1, frame2):
-    frame.grid(row=0, column=0, sticky='nsew')
+    frame.grid(row=0, column=0, sticky="nsew")
 
-# ==================Frame 1 code
-frame1_title = tk.Label(frame1, text='Page 1', font='times 35', bg='red')
-frame1_title.pack(fill='both', expand=True)
+tk.Label(frame1, text="hello world", bg="red", font="arial 30").pack()
 
-frame1_btn = tk.Button(frame1, text='Enter', command=lambda: show_frame(frame2))
-frame1_btn.pack(fill='x', ipady=15)
+tk.Button(frame1, text="touch me", command=lambda: show_frame(frame2)).pack()
 
-# ==================Frame 2 code
-frame2_title = tk.Label(frame2, text='Page 2', font='times 35', bg='yellow')
-frame2_title.pack(fill='both', expand=True)
+tk.Label(frame2, text="hello world", bg="blue", font="arial 30").pack()
 
-frame2_btn = tk.Button(frame2, text='Enter', command=lambda: show_frame(frame1))
-frame2_btn.pack(fill='x', ipady=15)
+tk.Button(frame2, text="touch me", command=lambda: show_frame(frame1)).pack()
 
-# ==================Frame 3 code
-show_frame(frame1)
 
-window.mainloop()
+root.mainloop()

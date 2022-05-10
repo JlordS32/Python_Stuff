@@ -12,13 +12,14 @@ class WindowConfig(tk.Tk):
         self.geometry("{}x{}".format(WIDTH, HEIGHT))
         self.resizable(False, False)
         self.title("GELOS Enterprise")
-        self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(0, weight=1)
+        # self.grid_columnconfigure(0, weight=1)
+        # self.grid_rowconfigure(0, weight=1)
 
 
 class App:
 
     def __init__(self, window):
+        # VARIABLES
         self.no_acc_text = None
         self.signup_btn = None
         self.confirm_key = True
@@ -29,27 +30,33 @@ class App:
         self.file = None
 
         # FRAME
-        self.frame = tk.Frame(window)
-        self.frame.place(anchor=tk.CENTER, rely=0.5, relx=0.5)
-        self.signup_frame = tk.Frame(window, width=WIDTH, height=HEIGHT, bg="black")
+        self.main_frame = tk.Frame(window)
+        self.signup_frame = tk.Frame(window)
 
+        for frame in (self.main_frame, self.signup_frame):
+            frame.grid(row=0, column=0)
+            frame.place_configure(relx=0.5, rely=0.5, anchor=tk.CENTER)
+
+        # MAIN FRAME
         self.entry_text = tk.StringVar()
         self.entry_text1 = tk.StringVar()
-        tk.Entry(self.frame, textvariable=self.entry_text, width=30, font=("Arial", 10)).grid(row=1, column=1, padx=5,
-                                                                                              pady=5)
-        tk.Entry(self.frame, textvariable=self.entry_text1, width=30, font=("Arial", 10)).grid(row=2, column=1, padx=5,
-                                                                                               pady=5)
+        tk.Entry(self.main_frame, textvariable=self.entry_text, width=30, font="arial 10").grid(row=1, column=1,
+                                                                                                padx=5, pady=5)
+        tk.Entry(self.main_frame, textvariable=self.entry_text1, width=30, font="arial 10").grid(row=2, column=1,
+                                                                                                 padx=5, pady=5)
+        tk.Label(self.main_frame, text="Username").grid(row=1, column=0, padx=5, pady=5)
+        tk.Label(self.main_frame, text="Password").grid(row=2, column=0, padx=5, pady=5)
 
-        tk.Label(self.frame, text="Username").grid(row=1, column=0, padx=5, pady=5)
-        tk.Label(self.frame, text="Password").grid(row=2, column=0, padx=5, pady=5)
+        tk.Button(self.main_frame, text="Login", command=self.on_click).grid(columnspan=2, row=3, pady=10)
 
-        tk.Button(self.frame, text="Login", command=self.on_click).grid(columnspan=2, row=3, pady=10)
-
-        wlc = tk.Label(self.frame, text="Hello, welcome to GELOS Enterprise!", font=("Calibri", 20), height=2)
+        wlc = tk.Label(self.main_frame, text="Hello, welcome to GELOS Enterprise!", font=("Calibri", 20), height=2)
         wlc.grid(columnspan=2, row=0, column=0, sticky=tk.N)
 
-        signup_btn = tk.Button(self.frame, text="Sign up", command=lambda: self.click_sign_up(self.signup_frame))
+        signup_btn = tk.Button(self.main_frame, text="Sign up", command=lambda: self.click_sign_up(self.signup_frame))
         signup_btn.grid(columnspan=2, row=4)
+
+        # SIGN UP FRAME
+        tk.Label(self.signup_frame, text='Page 1', font='times 35', bg='red')
 
     def on_click(self):
         self.a = self.entry_text.get()
@@ -72,15 +79,14 @@ class App:
                 # print("It's not inside yet... Put it in senpai~")
         self.file.close()
         if self.confirm_key is False:
-            self.no_acc_text = tk.Label(self.frame, text="Click 'sign up' to make a new account.", font=("Arial", 10))
+            self.no_acc_text = tk.Label(self.main_frame, text="Click 'sign up' to make a new account.", font="arial 10")
             self.no_acc_text.grid(columnspan=2, row=5, sticky=tk.S, ipady=10)
         print(self.confirm_key)
 
     def click_sign_up(self, frm):
         frm.tkraise()
-        tk.Label(self.signup_frame, text='Page 1', font='times 35', bg='red')
 
 
-root = WindowConfig()
-App(root)
-root.mainloop()
+window = WindowConfig()
+App(window)
+window.mainloop()
