@@ -1,5 +1,6 @@
 import random
 import string
+import time
 
 phonebook = {}
 no_account = None
@@ -59,7 +60,7 @@ if no_account is True:
     x = input("Do you wanna make an account? [y/n]: ")
     if x == "y":
         signup_key = input("Please enter your username: ")
-        confirm_genpass = input("Do you wanna user generated password? [y/n]: ")
+        confirm_genpass = input("Do you wanna use generated password? [y/n]: ")
         if confirm_genpass == "y":
             pass_gen()
         else:
@@ -71,3 +72,11 @@ if no_account is True:
         login()
     else:
         print("Thanks for visiting us.")
+elif no_account is False:
+    ext = input("Do you wanna exit the program? [y/n]: ")
+    if ext == "y":
+        for i in range(2):
+            time.sleep(1)
+            second = 2 - i
+            print("{} seconds".format(second))
+        print("Exiting Program....")
