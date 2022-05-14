@@ -1,29 +1,36 @@
-from tkinter import*
-
-class Window(Tk):
-
-    def __init__(self):
-        super().__init__()
-
-        self.geometry("500x500")
-        self.title("Ok game")
-        self.resizable(False, False)
-
-class frm(Frame):
-
-    def __init__(self):
-        super().__init__(background='black')
-
-        Button(text="Hello").grid(row=0, column=0, sticky=N)
-        Button(text="World").grid(row=0, column=1, sticky=N)
-
-        Label(text="Omae wa mou shindeiru.", font=("Roboto", 40)
-              ).grid(row=1, column=2)
+x = 2
 
 
+class Animal:
+
+    def __init__(self, animal_type):
+        print("The animal type is", animal_type)
+
+    def multiplication(self, a):
+        self.e = x * a
+        print(self.e)
+
+    def jlordstyle(self):
+        pass
 
 
-window = Window()
-frame = frm()
-frame.grid()
-window.mainloop()
+class Mammal(Animal):
+
+    def __init__(self, animal):
+        super().__init__("uwu")
+        print(animal)
+
+    def addition(self, x):
+        x = 10 + x
+        print(x)
+
+    def mult(self, a):
+        super().multiplication(6)
+        a += self.e
+        print(a)
+
+m = Mammal("i hate myself")
+m.multiplication(4)
+m.addition(3)
+
+m.mult(10)

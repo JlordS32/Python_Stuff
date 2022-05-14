@@ -34,8 +34,8 @@ class App:
         self.signup_frame = tk.Frame(window)
 
         for frame in (self.main_frame, self.signup_frame):
-            frame.grid(row=0, column=0)
-            frame.place_configure(relx=0.5, rely=0.5, anchor=tk.CENTER)
+            frame.grid(row=0, column=0, sticky="nsew")
+
 
         # MAIN FRAME
         self.entry_text = tk.StringVar()
