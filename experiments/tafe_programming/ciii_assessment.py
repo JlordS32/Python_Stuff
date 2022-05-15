@@ -50,6 +50,7 @@ def pass_generator():
         elif number_confirm == "n":
             print("Understandable.")
             break
+        print("\nInvalid Command.")
         number_confirm = input("Allow numbers? [y/n]: ")
 
     symbol_confirm = input("\nAllow symbols? [y/n]: ")
@@ -61,6 +62,7 @@ def pass_generator():
         elif symbol_confirm == "n":
             print("Alright.")
             break
+        print("\nInvalid Command.")
         symbol_confirm = input("Allow symbols? [y/n]: ")
     length = input("\nHow many characters do you want for your password? ")
     while length != int:
@@ -124,7 +126,7 @@ def sign_up():
             print("\n-----LOG IN MENU-----")
             login()
         else:
-            print("Thanks for visiting us.")
+            ext()
 
 
 def view():
