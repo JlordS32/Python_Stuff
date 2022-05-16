@@ -4,11 +4,15 @@ import string
 
 print("Welcome to GELOS Enterprise Portal!")
 print("-----------------------------------")
+
 no_account = None
 glob_option = ""
 options = ("login", "signin", "exit", "view")
 acc_val = {}
-signup_key = ""
+
+
+def local_var():
+    local_var.signup_key = ""
 
 
 def login():
@@ -22,18 +26,18 @@ def login():
         acc, pwd = line.split(" ")
         acc_val[acc] = pwd.strip()
     if (login_key in acc_val.keys()) and (login_value in acc_val[login_key]):
-        print("\nWelcome {}".format(login_key.title()))
+        print("\nWelcome {}!".format(login_key.title()))
         no_account = False
         ext()
     else:
         no_account = True
         print("You do not have an account on the server.")
         sign_up()
+        return no_account
     file.close()
 
 
 def pass_generator():
-    global signup_key
 
     letters = string.ascii_letters
     digits = string.digits
@@ -68,6 +72,13 @@ def pass_generator():
     while length != int:
         try:
             int(length)
+            while int(length) < 8:
+                print("\nPassword must be more than 8 characters.")
+                try:
+                    length = int(input("\nHow many characters do you want for your password? "))
+                except (ValueError, TypeError):
+                    print("\nError: Enter a number.")
+                    length = int(input("How many characters do you want for your password? "))
             break
         except (ValueError, TypeError):
             print("\nError: Enter a number.")
@@ -85,7 +96,7 @@ def pass_generator():
     print("\nHere's the generated password:", generated_pass)
 
     file = open("accounts.txt", "a")
-    file.write("{} {}\n".format(signup_key, generated_pass))
+    file.write("{} {}\n".format(local_var.signup_key, generated_pass))
 
 
 def ext():
@@ -94,12 +105,15 @@ def ext():
         if ext_confirm == "y":
             for sec in range(2):
                 x = 2 - sec
-                print(x)
+                if x == 1:
+                    print(x, "second")
+                else:
+                    print(x, "seconds")
                 time.sleep(1)
-            print("Exiting program...")
+            print("\nExiting program...")
             exit()
         elif ext_confirm == "n":
-            print("Initiating Program...")
+            print("\nInitiating Program...")
             for sec in range(2):
                 time.sleep(1)
             option_selection()
@@ -108,20 +122,22 @@ def ext():
 
 
 def sign_up():
-    global signup_key
     if no_account is True:
         x = input("\nDo you wanna make an account? [y/n]: ")
         if x == "y":
             print("\n-----SIGN IN MENU-----")
             signup = input("\nPlease enter your username: ")
-            signup_key = signup
+            local_var.signup_key = signup
             confirm_genpass = input("Do you wanna use generated password? [y/n]: ")
             if confirm_genpass == "y":
                 pass_generator()
             else:
                 signup_value = input("Enter a secure password: ")
+                while len(signup_value) < 8:
+                    print("\nPassword must be more than 8 characters.")
+                    signup_value = input("Enter a secure password: ")
                 file_in = open("accounts.txt", "a")
-                file_in.write("{} {}\n".format(signup_key, signup_value))
+                file_in.write("{} {}\n".format(local_var.signup_key, signup_value))
                 file_in.close()
             print("\n-----LOG IN MENU-----")
             login()
