@@ -11,6 +11,7 @@ options = ("a", "b", "c", "d")
 acc_val = {}
 signup_key = ""
 
+
 # FUNCTIONS
 def login():
     global no_account
@@ -148,8 +149,8 @@ def user_exist():
         acc, pwd = line.split(" ")
         acc_val[acc] = pwd.strip()
     while signup_key in acc_val.keys():
-        print("\nAn existing user already exist. Please enter a new one.")
-        signup = input("Please enter your username: ")
+        print("\nAn existing user already exist! Please enter a new one.")
+        signup = input("Username: ")
         signup_key = signup
 
 

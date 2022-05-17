@@ -18,16 +18,17 @@ class MyApp:
         label.configure(text="New label text", font=("Arial", 50))
 
         self.entry_text = StringVar()
-        entry = Entry(window, textvariable=self.entry_text)
-        entry.pack()
+        self.entry = Entry(window, textvariable=self.entry_text)
+        self.entry.pack()
 
         # label["textvariable"] = entry_text
 
-        button = Button(window, text="Press", command= lambda: self.add("1"))
+        button = Button(window, text="Press", command=lambda: self.press_button())
         button.pack()
 
     def press_button(self):
         text = self.entry_text.get()
+        self.entry.delete(0, END)
         self.label_text.set(text)
 
     def add(self, value):
