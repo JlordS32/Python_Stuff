@@ -98,7 +98,8 @@ class App:
             self.no_acc_text.grid(columnspan=2, row=5, sticky=tk.S, ipady=10)
         print(self.confirm_key)
 
-    def click_sign_up(self, frm):
+    @staticmethod
+    def click_sign_up(frm):
         frm.tkraise()
 
 
