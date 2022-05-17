@@ -31,7 +31,7 @@ class App:
         self.file = None
 
         # FRAME
-        self.signup_frame = tk.Frame(window, border=100)
+        self.signup_frame = tk.Frame(window, border=100, height=100)
         self.main_frame = tk.Frame(window, border=50)
 
         self.signup_frame.grid(row=0, column=0, sticky="nsew")
