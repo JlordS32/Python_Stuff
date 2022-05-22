@@ -100,6 +100,15 @@ def ext():
             ext_confirm = input("\nInvalid Command. Please input [y/n]: ")
 
 
+def if_space(if_space_pass):
+    no_space = (" " in if_space_pass)
+    while no_space is True:
+        if_space_pass = input("\nSpaces are not accepted in passwords."
+                              "\nPlease enter a new one without spaces: ")
+        no_space = (" " in if_space_pass)
+    return if_space_pass
+
+
 def sign_up(no_account):
     if no_account is True:
         print("\n-----------------SIGN IN MENU-----------------")
@@ -108,16 +117,24 @@ def sign_up(no_account):
         while x != "y" or "n":
             if x == "y":
                 signup_name = input("\nPlease enter your username: ")
+                signup_name = signup_name.replace(" ", "")
+                while len(signup_name) < 6:
+                    signup_name = input("\nUsername cannot be less than 6 characters."
+                                        "\nPlease type another one: ")
+                    signup_name = signup_name.replace(" ", "")
                 confirm_genpass = input("Do you wanna use generated password? [y/n]: ").lower()
                 while confirm_genpass != "y" or "n":
                     if confirm_genpass == "y":
                         pass_generator(signup_name)
                         break
                     elif confirm_genpass == "n":
+
                         signup_value = input("Enter a secure password: ")
+                        signup_value = if_space(signup_value)
                         while len(signup_value) < 8:
                             print("\nPassword must be more than 8 characters.")
                             signup_value = input("Enter a secure password: ")
+                            signup_value = if_space(signup_value)
                         signup_name = user_exist(signup_name)
                         file_in = open("accounts.txt", "a")
                         file_in.write("\n{} {}".format(signup_name, signup_value))
@@ -180,13 +197,21 @@ def pass_generator(key):
     while length != int:
         try:
             int(length)
-            while int(length) < 8:
-                print("\nPassword must be more than 8 characters.")
-                try:
-                    length = int(input("\nHow many characters do you want for your password? "))
-                except (ValueError, TypeError):
-                    print("\nError: Enter a number.")
-                    length = int(input("How many characters do you want for your password? "))
+            while (int(length) < 8) or (int(length) > 20):
+                if int(length) < 8:
+                    print("\nPassword cannot be more than 8 characters.")
+                    try:
+                        length = int(input("\nHow many characters do you want for your password? "))
+                    except (ValueError, TypeError):
+                        print("\nError: Enter a number.")
+                        length = int(input("How many characters do you want for your password? "))
+                elif int(length) > 20:
+                    print("\nPassword must be less than 20 characters.")
+                    try:
+                        length = int(input("\nHow many characters do you want for your password? "))
+                    except (ValueError, TypeError):
+                        print("\nError: Enter a number.")
+                        length = int(input("How many characters do you want for your password? "))
             break
         except (ValueError, TypeError):
             print("\nError: Enter a number.")

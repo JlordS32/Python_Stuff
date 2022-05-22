@@ -1,4 +1,3 @@
-def uwu(a):
-    print(a)
+a = ["", "ad"]
 
-b = uwu("muah")
+print(len(a))
