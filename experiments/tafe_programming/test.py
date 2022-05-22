@@ -1,3 +1,5 @@
-a = ["", "ad"]
+import datetime
 
-print(len(a))
+date = datetime.date(2022, 8, 22)
+
+print(date)

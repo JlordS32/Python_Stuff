@@ -48,7 +48,7 @@ def login():
     for line in file.readlines():
         acc, pwd = line.split(" ")
         acc_val[acc] = pwd.strip()
-        file.close()
+    file.close()
     if (login_key in acc_val.keys()) and (login_value in acc_val[login_key]):
         print("\nWelcome {}!".format(login_key.title()))
         ext()
@@ -230,6 +230,7 @@ def pass_generator(key):
     key = user_exist(key)
     file = open("accounts.txt", "a")
     file.write("\n{} {}".format(key, generated_pass))
+    file.close()
 
 
 def user_exist(username):
@@ -238,6 +239,7 @@ def user_exist(username):
     for line in file.readlines():
         acc, pwd = line.split(" ")
         acc_val[acc] = pwd.strip()
+    file.close()
     while username in acc_val.keys():
         print("\nAn existing user already exist. Please enter a new one.")
         username = input("Please enter a new one: ")
@@ -265,6 +267,7 @@ def view():
         for i in file:
             user, pwd = i.split(" ")
             acc_val[user] = pwd.strip()
+        file.close()
         print("\nHere's the list of users with their password:")
         print("\n{:15s} {}".format("Username", "Password"))
         print("--------------------------")
@@ -282,7 +285,7 @@ def view():
                                        "\nPlease input [y/n]")
     else:
         print("\nACCESS DENIED!")
-        for i in range(2):
+        for i in range(1):
             time.sleep(2)
         print("TERMINATING PROGRAM...")
         exit()
