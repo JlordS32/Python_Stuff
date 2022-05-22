@@ -6,20 +6,17 @@ print("Welcome to GELOS Enterprise Portal!")
 
 # GLOBAL VARIABLES
 no_account = None
-glob_option = ""
 options = ("a", "b", "c", "d")
 acc_val = {}
-signup_key = ""
-
 
 # FUNCTIONS
+
+
 def login():
     global no_account
-
     print("\n------------------LOG IN MENU------------------")
     login_key = input("\nPlease enter your username: ")
     login_value = input("Password: ")
-
     file = open("accounts.txt", "r")
     for line in file.readlines():
         acc, pwd = line.split(" ")
@@ -36,15 +33,11 @@ def login():
     file.close()
 
 
-def pass_generator():
-    global signup_key
-
+def pass_generator(key):
     letters = string.ascii_letters
     digits = string.digits
     symbols = string.punctuation
-
     user_combination = letters
-
     number_confirm = input("\nAllow numbers? [y/n]: ")
     while number_confirm != "y" or "n":
         if number_confirm == "y":
@@ -56,7 +49,6 @@ def pass_generator():
             break
         print("\nInvalid Command.")
         number_confirm = input("Allow numbers? [y/n]: ")
-
     symbol_confirm = input("\nAllow symbols? [y/n]: ")
     while symbol_confirm != "y" or "n":
         if symbol_confirm == "y":
@@ -68,7 +60,6 @@ def pass_generator():
             break
         print("\nInvalid Command.")
         symbol_confirm = input("Allow symbols? [y/n]: ")
-
     length = input("\nHow many characters do you want for your password? ")
     while length != int:
         try:
@@ -84,7 +75,6 @@ def pass_generator():
         except (ValueError, TypeError):
             print("\nError: Enter a number.")
             length = input("How many characters do you want for your password? ")
-
     generated_pass = ""
     for i in range(int(length)):
         i = random.choice(user_combination)
@@ -95,10 +85,8 @@ def pass_generator():
         seconds = 5 - sec
         print("Generating password in", seconds, "seconds...")
     print("\nHere's the generated password:", generated_pass)
-
-    user_exist()
     file = open("accounts.txt", "a")
-    file.write("\n{} {}".format(signup_key, generated_pass))
+    file.write("\n{} {}".format(key, generated_pass))
 
 
 def ext():
@@ -118,39 +106,36 @@ def ext():
 
 
 def sign_up():
-    global signup_key
     if no_account is True:
         x = input("\nDo you wanna make an account? [y/n]: ")
         if x == "y":
             print("\n-----------------SIGN IN MENU-----------------")
-            signup = input("\nPlease enter your username: ")
-            signup_key = signup
+            signup_name = input("\nPlease enter your username: ")
             confirm_genpass = input("Do you wanna use generated password? [y/n]: ")
             if confirm_genpass == "y":
-                pass_generator()
+                pass_generator(signup_name)
             else:
                 signup_value = input("Enter a secure password: ")
                 while len(signup_value) < 8:
                     print("\nPassword must be more than 8 characters.")
                     signup_value = input("Enter a secure password: ")
-                user_exist()
+                user_exist(signup_name)
                 file_in = open("accounts.txt", "a")
-                file_in.write("\n{} {}".format(signup_key, signup_value))
+                file_in.write("\n{} {}".format(signup_name, signup_value))
                 file_in.close()
             login()
         else:
             ext()
 
 
-def user_exist():
-    global signup_key
+def user_exist(username):
     file = open("accounts.txt", "r")
     for line in file.readlines():
         acc, pwd = line.split(" ")
         acc_val[acc] = pwd.strip()
-    while signup_key in acc_val.keys():
-        print("\nAn existing user already exist! Please enter a new one.")
-        signup = input("Username: ")
+    while username in acc_val.keys():
+        print("An existing user already exist. Please enter a new one.")
+        signup = input("\nPlease enter your username: ")
         signup_key = signup
 
 
@@ -163,7 +148,6 @@ def view():
     print("PROGRAM MAY BE TERMINATED IF ACCOUNT IS INVALID")
     admin_username = input("\nPlease input admin username: ")
     admin_pwd = input("Password: ")
-
     if admin_username and admin_pwd == "admin":
         file = open("accounts.txt", "r")
         for i in file:
@@ -182,36 +166,30 @@ def view():
         exit()
 
 
-def option_loop():
-    global glob_option
+def option_loop(option):
     global no_account
-    if glob_option == options[0]:
+    if option == options[0]:
         login()
-    elif glob_option == options[1]:
+    elif option == options[1]:
         no_account = True
         sign_up()
-    elif glob_option == options[2]:
+    elif option == options[2]:
         ext()
-    elif glob_option == options[3]:
+    elif option == options[3]:
         view()
 
 
 def option_selection():
-    global glob_option
-
     print("\n---------------OPTION SELECTION---------------")
-    print("\nOption: [a: login |b: signin |c: exit |d: view ] ")
+    print("\nOption: [a) login |b) signin |c) exit |d) view ] ")
     option = input("Please input command: [ a | b | c | d ]: ").lower()
     while option not in options:
         print("\nPlease input a proper command. Thank you.")
         option = input("Please input command: [ a | b | c | d ]: ").lower()
-    glob_option = option
-    option_loop()
-    while glob_option not in options:
+    option_loop(option)
+    while option not in options:
         print("\nInvalid command.")
         option = input("Option: [ login | signin | exit | view ]: ").lower()
-        glob_option = option
-        option_loop()
-
+        option_loop(option)
 
 option_selection()

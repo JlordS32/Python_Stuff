@@ -16,19 +16,18 @@ H = []
 
 Figure = 0
 
-for i in range(3):
+for i in range(4):
     A.append("A = Figure")
-    D.append("D = Figure")
-for i in range(2):
     B.append("B = Figure")
+for i in range(1):
     C.append("C = Figure")
-for i in range(8):
+for i in range(13):
     E.append("E = Mug")
-for i in range(15):
+for i in range(14):
     F.append("F = Note")
-for i in range(19):
+for i in range(14):
     G.append("G = Mini Plate")
-for i in range(26):
+for i in range(0):
     H.append("H = Folder Set")
 
 figure_class = A + B + C + D
@@ -40,7 +39,7 @@ tickets = int(input("\nHow many tickets? "))
 print("\nHere are your prizes: ")
 print("----------------------")
 for i in range(tickets):
-    time.sleep(seconds)
+    # time.sleep(seconds)
     x = random.choice(result)
     if x in figure_class:
         Figure += 1
