@@ -40,9 +40,11 @@ def option_loop(option):
 
 def login():
     print("\n------------------LOG IN MENU------------------")
+
     login_key = input("\nPlease enter your username: ")
     login_value = input("Password: ")
     file = open("accounts.txt", "r")
+
     for line in file.readlines():
         acc, pwd = line.split(" ")
         acc_val[acc] = pwd.strip()
@@ -82,6 +84,7 @@ def login():
 
 def ext():
     ext_confirm = input("\nDo you wanna exit the program? [y/n]: ").lower()
+
     while ext_confirm != "y" or "n":
         if ext_confirm == "y":
             for sec in range(2):
@@ -101,6 +104,7 @@ def sign_up(no_account):
     if no_account is True:
         print("\n-----------------SIGN IN MENU-----------------")
         x = input("\nDo you wanna make an account? [y/n]: ").lower()
+
         while x != "y" or "n":
             if x == "y":
                 signup_name = input("\nPlease enter your username: ")
@@ -141,10 +145,13 @@ def sign_up(no_account):
 
 
 def pass_generator(key):
+
     letters = string.ascii_letters
     digits = string.digits
     symbols = string.punctuation
+
     user_combination = letters
+
     number_confirm = input("\nAllow numbers? [y/n]: ").lower()
     while number_confirm != "y" or "n":
         if number_confirm == "y":
@@ -156,6 +163,7 @@ def pass_generator(key):
             break
         print("\nInvalid Command.")
         number_confirm = input("Allow numbers? [y/n]: ").lower()
+
     symbol_confirm = input("\nAllow symbols? [y/n]: ").lower()
     while symbol_confirm != "y" or "n":
         if symbol_confirm == "y":
@@ -167,6 +175,7 @@ def pass_generator(key):
             break
         print("\nInvalid Command.")
         symbol_confirm = input("Allow symbols? [y/n]: ").lower()
+
     length = input("\nHow many characters do you want for your password? ")
     while length != int:
         try:
@@ -182,6 +191,7 @@ def pass_generator(key):
         except (ValueError, TypeError):
             print("\nError: Enter a number.")
             length = input("How many characters do you want for your password? ")
+
     generated_pass = ""
     for i in range(int(length)):
         i = random.choice(user_combination)
@@ -199,6 +209,7 @@ def pass_generator(key):
 
 def user_exist(username):
     file = open("accounts.txt", "r")
+
     for line in file.readlines():
         acc, pwd = line.split(" ")
         acc_val[acc] = pwd.strip()
@@ -213,13 +224,17 @@ def user_exist(username):
 
 def view():
     print("\nINITIATING...")
+
     for i in range(2):
         time.sleep(1)
+
     print("\n------------------ADMIN VIEW------------------")
     print("\nWARNING! AUTHORISATION IS REQUIRED FOR ACCESS.")
     print("PROGRAM MAY BE TERMINATED IF ACCOUNT IS INVALID")
+
     admin_username = input("\nPlease input admin username: ")
     admin_pwd = input("Password: ")
+
     if admin_username and admin_pwd == "admin":
         file = open("accounts.txt", "r")
         for i in file:
