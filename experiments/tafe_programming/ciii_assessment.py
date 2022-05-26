@@ -337,4 +337,3 @@ def view():
 # CALLING OUT THE FUNCTIONS
 
 main()
-
