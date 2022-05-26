@@ -16,9 +16,9 @@ class Animal:
 
 class Mammal(Animal):
 
-    def __init__(self, animal):
-        super().__init__("uwu")
-        print(animal)
+    def __init__(self, x):
+        super().__init__(x)
+        print(x)
 
     def addition(self, x):
         x = 10 + x
@@ -29,8 +29,4 @@ class Mammal(Animal):
         a += self.e
         print(a)
 
-m = Mammal("i hate myself")
-m.multiplication(4)
-m.addition(3)
-
-m.mult(10)
+m = Mammal("carabaw")

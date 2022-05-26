@@ -1,5 +1,5 @@
-import datetime
+x = "abc"
 
-date = datetime.date(2022, 8, 22)
+y = " " in x
 
-print(date)
+print(y)
