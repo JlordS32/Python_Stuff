@@ -21,7 +21,7 @@ def main():
           "\nC. EXIT"
           "\nD. VIEW")
 
-    # Ask user for option confirmation
+    # Asks user for option confirmation
     option = input("\nPlease input command: [ A | B | C | D ]: ").lower()
     while option not in options:
         print("\nPlease input a proper command. Thank you.")
@@ -44,7 +44,7 @@ def option_loop(option):
 def login():
     print("\n------------------LOG IN MENU------------------")
 
-    # Ask user for username and password for login validation.
+    # Asks user for username and password for login validation.
     login_key = input("\nPlease enter your username: ")
     login_value = input("Password: ")
     file = open("accounts.txt", "r")
