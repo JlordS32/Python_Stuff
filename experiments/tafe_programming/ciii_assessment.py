@@ -284,6 +284,7 @@ def user_exist(username):
         # if the new username is no longer in 'accounts.txt' username will be returned back to variable in sign_up
         # responsible for the username creation.
     else:
+        # in the case user passes the while loop validation, the value is just automatically sent back to sign_up.
         return username
 
 
