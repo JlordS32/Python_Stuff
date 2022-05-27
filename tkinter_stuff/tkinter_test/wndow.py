@@ -13,7 +13,7 @@ class WindowConfig(tk.Tk):
 class App:
 
     def __init__(self, root):
-        img = tk.PhotoImage(file="logo\\hacker.png")
+        img = tk.PhotoImage(file="logo/hacker.png")
 
         frame = tk.Frame(root)
         frame.pack()
@@ -23,7 +23,7 @@ class App:
 
 
 root = WindowConfig()
-icon = tk.PhotoImage(file="logo\logo.png")
+icon = tk.PhotoImage(file="logo/logo.png")
 root.iconphoto(True, icon)
 App(root)
 root.mainloop()

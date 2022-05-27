@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 WIDTH = 500
 HEIGHT = 300
 
