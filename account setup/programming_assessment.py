@@ -8,7 +8,6 @@ class WindowConfig(tk.Tk):
 
     def __init__(self):
         super().__init__()
-
         self.geometry("{}x{}".format(WIDTH, HEIGHT))
         self.resizable(False, False)
         self.title("GELOS Enterprise")
@@ -28,6 +27,8 @@ class App:
         self.user = None
         self.pwd = None
         self.file = None
+        self.create_pwd = None
+        self.create_user = None
 
         # FRAME
         self.acs_frame = tk.Frame(window, border=200)
@@ -63,9 +64,9 @@ class App:
         signup_btn.grid(columnspan=2, row=4)
 
         # SIGN UP FRAME
-        main_btn = tk.Button(self.signup_frame, text="Create Account", command=lambda: self.click_sign_up(self.main_frame))
+        main_btn = tk.Button(self.signup_frame, text="Create Account",
+                             command=lambda: self.click_create_acc(self.main_frame))
         main_btn.grid(row=3, column=0, columnspan=2, pady=10)
-
         signup_text = tk.Label(self.signup_frame, text="Sign up", font="calibri 20")
         signup_text.grid(row=0, column=0, columnspan=2, pady=10)
 
@@ -83,9 +84,7 @@ class App:
     def on_click(self, frm):
         self.acc = self.entry_text.get()
         self.passw = self.entry_text1.get()
-
         self.reading()
-
         if self.confirm_key is True:
             frm.tkraise()
             self.welcome_screen()
@@ -93,8 +92,8 @@ class App:
     def reading(self):
         self.file = open("accounts.txt", "r")
         for line in self.file.readlines():
-            data = line.strip()
-            self.user, self.pwd = data.split(".")
+            data = line.strip(" ")
+            self.user, self.pwd = data.split(" ")
             # print("Accounts:{:15s} Password:{}".format(self.user, self.pwd))
             if (self.acc == self.user) and (self.passw == self.pwd):
                 self.confirm_key = True
@@ -104,20 +103,29 @@ class App:
         self.file.close()
         if self.confirm_key is False:
             tk.Label(self.main_frame, text="Account doesn't exist on the server.").grid(columnspan=2, row=5, pady=5)
-            self.no_acc_text = tk.Label(self.main_frame, text="Click 'sign up' to make a new account.", font="arial 10")
+            self.no_acc_text = tk.Label(self.main_frame, text="Click 'sign up' to make a new account.")
             self.no_acc_text.grid(columnspan=2, row=6, sticky=tk.S)
         print(self.confirm_key)
 
     def click_sign_up(self, frm):
         self.main_entry.delete(0, tk.END)
         self.main_entry1.delete(0, tk.END)
-        self.signup_entry.delete(0, tk.END)
-        self.signup_entry1.delete(0, tk.END)
         frm.tkraise()
 
     def welcome_screen(self):
         tk.Label(self.acs_frame, text="Welcome {}".format(self.acc)).pack()
 
+    def click_create_acc(self, frm):
+        self.acc_creation()
+        self.signup_entry.delete(0, tk.END)
+        self.signup_entry1.delete(0, tk.END)
+        frm.tkraise()
+
+    def acc_creation(self):
+        self.create_user = self.signup_entry.get()
+        self.create_pwd = self.signup_entry1.get()
+        file = open("accounts.txt", "a")
+        file.write("\n{} {}".format(self.create_user, self.create_pwd))
 
 
 window = WindowConfig()

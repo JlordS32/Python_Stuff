@@ -228,7 +228,7 @@ def pass_generator(key):
         try:
             int(length)
             # Basically the same as sign_up. The same validation stuff.
-            while (int(length) < 8) or (int(length) > 20):
+            while int(length) not in range(8, 20):
                 if int(length) < 8:
                     print("\nPassword cannot be more than 8 characters.")
                     try:

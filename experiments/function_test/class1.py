@@ -66,3 +66,6 @@ emp2_2.type_employee('Jaylou', 'Rasonabe', 60000)
 print(emp1_1.first, emp1_1.last)
 print(emp2_2.first, emp2_2.last)
 print(emp1_1.email,  emp2_2.email)
+
+if __name__ == "__main__":
+    pass

@@ -1,5 +1,6 @@
 # This is the classification
 
+
 class Fruits:
     def type_fruit(self, name, colour):
         self.fruit = name
