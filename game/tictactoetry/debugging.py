@@ -1,6 +1,8 @@
-winning_tiles = ([1, 2, 3], [4, 5, 6], [7, 8, 9], [3, 5, 7], [1, 5, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9])
-tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+x = ((1, 2, 3), (4, 5, 6), (4, 5, 1))
 
-x = [2, 1, 4, 3]
-
-print(list(winning_tiles))
+y = [4, 1, 6, 5]
+for index, tile in enumerate(x):
+    print(tile)
+    z = all(item in y for item in tile)
+    if z is True:
+        break
