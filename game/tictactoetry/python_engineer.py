@@ -8,17 +8,17 @@ winning_tiles = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6),
 
 class TicTacToe:
 
-    def __init__(self, y):
-        self.board = y*9
+    def __init__(self):
+        self.board = " "*9
 
     def print_board(self):
         for i, val in enumerate(self.board):
             end = " | "
             if i == 2 or i == 5:
-                end = "\n---------\n"
+                print("\n---------\n")
             elif i == 8:
                 end = "\n"
             print(val, end=end)
 
-x = TicTacToe([" "])
+x = TicTacToe()
 x.print_board()
