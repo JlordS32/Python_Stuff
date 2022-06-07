@@ -57,14 +57,21 @@ class TicTacToe:
         while True:
             print("\n-----------PLAYER TURN-----------\n")
 
-            self.player_choice = int(input("Type a number 0-8: "))
-            while self.player_choice not in tiles:
-                if not -1 < self.player_choice < 9:
-                    print("\nNumber out of range [0-8].")
-                    self.player_choice = int(input("Type a number 0-8: "))
-                else:
-                    print("\nSpot is already taken.")
-                    self.player_choice = int(input("Type a number 0-8: "))
+            self.player_choice = input("Type a number 0-8: ")
+            while self.player_choice != int:
+                try:
+                    self.player_choice = int(self.player_choice)
+                    while self.player_choice not in tiles:
+                        if not -1 < self.player_choice < 9:
+                            print("\nNumber out of range [0-8].")
+                            self.player_choice = int(input("Type a number 0-8: "))
+                        else:
+                            print("\nSpot is already taken.")
+                            self.player_choice = int(input("Type a number 0-8: "))
+                    break
+                except (ValueError, TypeError):
+                    print("\nStrings are not accepted. Please enter a number.")
+                    self.player_choice = input("Type a number 0-8: ")
             tiles.remove(self.player_choice)
             player.append(self.player_choice)
             time.sleep(1)
@@ -72,6 +79,8 @@ class TicTacToe:
             self.can_win(player, opponent)
 
             print("\n-----------OPPONENT TURN-----------")
+            print("\nOpponent taking turn...")
+            time.sleep(2)
 
             while len(tiles) != 0:
                 self.opponent_turn = random.choice(tiles)
