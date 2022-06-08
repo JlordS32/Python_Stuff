@@ -16,6 +16,8 @@ class TicTacToe:
     def __init__(self):
 
         self.attempts = 0
+        self.player_score = 0
+        self.opponent_score = 0
         self.player_choice = None
         self.opponent_turn = None
         self.board = " "*9
@@ -51,6 +53,10 @@ class TicTacToe:
             print(val, end=end)
 
     def game(self):
+        print("\n---------------------------------\n")
+        print("ATTEMPTS: {}".format(self.attempts))
+        print("\nYour score: {:3s} Opponent Score: {}".format(str(self.player_score), self.opponent_score))
+
         player = []
         opponent = []
 
@@ -92,17 +98,20 @@ class TicTacToe:
                 break
 
     def can_win(self, player, opponent):
+        print(tiles)
 
         for tile in winning_tiles:
             player_win = all(item in player for item in tile)
             opponent_win = all(item in opponent for item in tile)
             if player_win is True:
                 print("\nYou won!")
+                self.player_score += 1
                 self.continue_validation()
             if opponent_win is True:
                 print("\nYou lost!")
+                self.opponent_score += 1
                 self.continue_validation()
-            if player_win and opponent_win is False and len(tiles) == 0:
+            if len(tiles) == 0:
                 print("\nTie!")
                 self.continue_validation()
 
@@ -111,6 +120,8 @@ class TicTacToe:
         while confirmation != "y" or "n":
             if confirmation == "y":
                 self.attempts += 1
+                for i in range(9):
+                    tiles.append(i)
                 self.game()
             elif confirmation == "n":
                 print("Exiting Game.")
