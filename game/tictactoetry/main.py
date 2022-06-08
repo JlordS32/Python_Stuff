@@ -23,17 +23,28 @@ class TicTacToe:
         self.board = " "*9
 
     def run(self):
-        print("\n                TIC-TAC-TOE\n"
-              "\nThe layout of this game will be as followed.\n"
-              "\n {:16s}0 | 1 | 2"
-              "\n {:16s}3 | 4 | 5"
-              "\n {:16s}6 | 7 | 8".format("", "", ""))
+        print("\n                TIC-TAC-TOE\n")
+
+        for i in "The layout of this game will be as followed.\n":
+            print(i, end="")
+            time.sleep(0.05)
+
+        time.sleep(2)
+        print("\n{:16s}0 | 1 | 2".format(""))
+        time.sleep(0.5)
+        print("{:16s}3 | 4 | 5".format(""))
+        time.sleep(0.5)
+        print("{:16s}6 | 7 | 8".format(""))
 
         time.sleep(1)
         print("\nPlease only enter numbers to place your move based on the layout.")
         time.sleep(1)
-        print("\nLoading...")
-        time.sleep(3)
+
+        print("\nLoading", end="")
+        for i in "...":
+            time.sleep(1)
+            print(i, end="")
+        print("")
         self.game()
 
     def print_board(self, player, opponent):
@@ -50,6 +61,7 @@ class TicTacToe:
                     val = player_token
                 elif i in opponent:
                     val = opponent_token
+            time.sleep(0.25)
             print(val, end=end)
 
     def game(self):
@@ -85,20 +97,21 @@ class TicTacToe:
             self.can_win(player, opponent)
 
             print("\n-----------OPPONENT TURN-----------")
-            print("\nOpponent taking turn...")
-            time.sleep(2)
+            print("\nOpponent taking turn", end="")
+            for i in "...":
+                time.sleep(1)
+                print(i, end="")
+            print("")
 
             while len(tiles) != 0:
                 self.opponent_turn = random.choice(tiles)
                 tiles.remove(self.opponent_turn)
                 opponent.append(self.opponent_turn)
-                time.sleep(1)
                 self.print_board(player, opponent)
                 self.can_win(player, opponent)
                 break
 
     def can_win(self, player, opponent):
-        print(tiles)
 
         for tile in winning_tiles:
             player_win = all(item in player for item in tile)
@@ -120,11 +133,15 @@ class TicTacToe:
         while confirmation != "y" or "n":
             if confirmation == "y":
                 self.attempts += 1
+                tiles.clear()
                 for i in range(9):
                     tiles.append(i)
                 self.game()
             elif confirmation == "n":
-                print("Exiting Game.")
+                print("\nExiting Game", end="")
+                for i in "...":
+                    time.sleep(1)
+                    print(i, end="")
                 exit()
 
 
