@@ -17,12 +17,13 @@ class TicTacToe:
 
     def __init__(self):
 
-        self.attempts = 0
         self.player_score, self.opponent_score = 0, 0
         self.player, self.opponent = [], []
         self.player_choice, self.opponent_turn = None, None
+        self.player_win, self.opponent_win = None, None
+
+        self.attempts = 0
         self.board = " " * 9
-        self.whofirst = None
 
     def run(self):
 
@@ -69,22 +70,36 @@ class TicTacToe:
             print(val, end=end)
 
     def game(self):
-        print("----------------------\n"
-              "\nRock, Paper, Scissor will be played first to determine who goes first.")
-
-        if self.attempts > 0:
-            self.whofirst = None
-            self.whofirst = who_first.some_instance.for_imports()
-        else:
-            self.whofirst = who_first.some_instance.for_imports()
+        if self.attempts == 0:
+            print("----------------------\n"
+                  "\nRock, Paper, Scissor will be played first to determine who goes first.")
+        if self.attempts == 1:
+            print("----------------------\n"
+                  "\nInstructions: Whoever lost on the previous attempt will have to go first."
+                  "\nIf tie, previous winner will have to go first.")
 
         print("\n---------------------------------\n")
         print("ATTEMPTS: {}".format(self.attempts))
         print("\nYour score: {:3s} Opponent Score: {}".format(str(self.player_score), self.opponent_score))
 
-        if self.whofirst is True:
+        if self.attempts == 0:
+            self.who_goes_first()
+        elif self.attempts > 0:
+            if self.player_win is True:
+                self.opponent_function()
+            if self.opponent_win is True:
+                self.player_function()
+            if self.player_win and self.opponent_win is False:
+                self.who_goes_first()
+
+    def who_goes_first(self,):
+
+        some_instance = who_first.RockPaperScissor()
+        x = some_instance.for_imports()
+
+        if x is True:
             self.player_function()
-        elif self.whofirst is False:
+        else:
             self.opponent_function()
 
     def player_function(self):
@@ -143,14 +158,14 @@ class TicTacToe:
     def who_win(self):
 
         for tile in winning_tiles:
-            player_win = all(item in self.player for item in tile)
-            opponent_win = all(item in self.opponent for item in tile)
-            tie = [player_win, opponent_win]
-            if player_win is True:
+            self.player_win = all(item in self.player for item in tile)
+            self.opponent_win = all(item in self.opponent for item in tile)
+            tie = [self.player_win, self.opponent_win]
+            if self.player_win is True:
                 print("\nYou won!")
                 self.player_score += 1
                 self.continue_validation()
-            elif opponent_win is True:
+            elif self.opponent_win is True:
                 print("\nYou lost!")
                 self.opponent_score += 1
                 self.continue_validation()
@@ -179,5 +194,6 @@ class TicTacToe:
                 exit()
 
 
-main = TicTacToe()
-main.run()
+if __name__ == "__main__":
+    main = TicTacToe()
+    main.run()

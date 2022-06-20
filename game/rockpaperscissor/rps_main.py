@@ -155,17 +155,14 @@ class RockPaperScissor:
                 confirm_continue = input("Do you wanna continue? [y/n]:").lower()
 
     def for_imports(self):
-        while True:
-            if self.opponent_score == 1:
-                return False
-            elif self.player_score == 1:
-                return True
-            else:
-                self.play()
+        if self.opponent_score == 1:
+            return False
+        elif self.player_score == 1:
+            return True
+        else:
+            self.play()
 
 
-if __name__ != "__main__":
-    some_instance = RockPaperScissor()
-else:
+if __name__ == "__main__":
     game = RockPaperScissor()
     game.game_run()
