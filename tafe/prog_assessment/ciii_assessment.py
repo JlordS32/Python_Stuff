@@ -164,9 +164,9 @@ def sign_up():
                     # The function user_exist was used here to validate is user has input a username that is currently
                     # existing in the database 'accounts.txt'.
                     signup_name = user_exist(signup_name)
-                    file_in = open("accounts.txt", "a")
-                    file_in.write("\n{} {}".format(signup_name, signup_value))
-                    file_in.close()
+                    with open("accounts.txt", "a") as file_in:
+                        file_in.write("\n{} {}".format(signup_name, signup_value))
+                        file_in.close()
                     break
                 else:
                     print("\nInvalid command.")
