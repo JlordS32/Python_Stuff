@@ -12,6 +12,8 @@ class RockPaperScissor:
         self.player_score = 0
         self.attempts = 0
         self.truefalse = None
+        self.confirmation = []
+        self.yes_no = ["y", "n"]
 
     def game_run(self):
 
@@ -142,17 +144,18 @@ class RockPaperScissor:
         self.attempts += 1
 
     def game_continue(self):
+        self.confirmation.clear()
+        confirm = input("\nDo you wanna continue? [y/n]: ").lower()
+        self.confirmation.append(confirm)
 
-        confirm_continue = input("\nDo you wanna continue? [y/n]: ").lower()
-
-        while confirm_continue != "y" or "n":
-            if confirm_continue == "y":
+        while self.confirmation not in self.yes_no:
+            if self.confirmation[0] == self.yes_no[0]:
                 self.play()
-            elif confirm_continue == "n":
+            elif self.confirmation[0] == self.yes_no[1]:
                 self.ext()
             else:
                 print("\nInvalid command.")
-                confirm_continue = input("Do you wanna continue? [y/n]:").lower()
+                self.confirmation = input("Do you wanna continue? [y/n]:").lower()
 
     def for_imports(self):
         if self.opponent_score == 1:
