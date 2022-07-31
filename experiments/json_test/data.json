@@ -1,6 +1,4 @@
-import json
-
-world_dictionary = {
+{
     "names": {
         "person": "Jesus",
         "age": 34,
@@ -13,7 +11,3 @@ world_dictionary = {
         "name": "apple"
     }
 }
-
-the_string = json.dumps(world_dictionary, indent=4)
-with open("data.json", "w") as f:
-    f.write(the_string)
