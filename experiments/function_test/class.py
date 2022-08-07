@@ -32,12 +32,12 @@ a = Tweet("Something about this is wrong.")
 print(a.x)
 
 class epic:
-    def __init__(self, message):
-        self.message = message
+    def __init__(self):
+        self.message = "SOMETHING SOMETHING"
     def print_epic(self):
         print(self.message)
 
-z = epic("Something about this is epic.")
+z = epic()
 
 z.print_epic()
 
